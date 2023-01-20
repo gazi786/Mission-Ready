@@ -1,0 +1,16 @@
+h1{
+	font-size: 90px;
+}
+p{
+	margin: 35px 0px;
+	color: brown;
+}
+/* CSS Classes */
+.intro{
+	font-family: Tahoma;
+}
+
+/* CSS IDs */
+#divheader{
+	font-size: 40px;
+}

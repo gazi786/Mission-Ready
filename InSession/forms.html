@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Forms</title>
+	<link href="./styles/forms.css" rel="stylesheet"/>
+</head>
+<body>
+	<header>
+
+	</header>
+	<main class="main">
+		<section>
+			<div class="row">
+				<h1 class="contact">Contact Us</h1>
+			</div>
+		</section>
+		<section>
+			<div class="container">
+				<form action="mailto:alshafarazhg@missionready.com">
+					<div class="row">
+						<div class="col-25">
+							<label for="fname">Full Name</label>
+						</div>
+						<div class="col-75">
+							<input type="text" id="fname" name="fullname" placeholder="Enter your full name.." required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-25">
+							<label for="email">Email</label>
+						</div>
+						<div class="col-75">
+							<input type="text" id="email" name="email" placeholder="Enter your email.." required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-25">
+							<label for="service">Service</label>
+						</div>
+						<div class="col-75">
+							<label class="radio-container">Support
+								<input type="radio" checked="checked" name="service" value="support">
+								<span class="checkmark"></span>
+							</label>
+							<label class="radio-container">Sales
+								<input type="radio" name="service" value="sales">
+								<span class="checkmark"></span>
+							</label>
+							<label class="radio-container">Others
+								<input type="radio" name="service" value="others">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-25">
+							<label for="country">Country</label>
+						</div>
+						<div class="col-75">
+							<select id="country" name="country">
+								<option value="new zelanad">New Zealand</option>
+								<option value="australia">Australia</option>
+								<option value="Fiji">Fiji</option>
+								<option value="Samoa">Samoa</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-25">
+							<label for="subject">Subject</label>
+						</div>
+						<div class="col-75">
+							<textarea id="subject" name="subject" placeholder="Write something.." required></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="right">
+							<button class="btn form-reset" type="reset">Reset Form</button>
+							<button class="btn form-submit" type="submit">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+	<footer class="footer">
+		<div class="row">
+			<div class="footer-container">
+				<div class="copyright left">
+					<p>Copyright &copy; - All rights reserved.</p>
+				</div>
+				<div class="footer-credit right">
+					<p>Designed & Managed by <a href="https://www.alshafarazhg.com">Alshafaraz Gazi</a></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

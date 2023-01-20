@@ -1,0 +1,22 @@
+#main{
+	display: flex;
+	background-color: aqua;
+	align-items: center;
+	justify-content: center;
+}
+.child-el1{
+	background-color: green;
+	height: 100px;
+}
+.child-el2{
+	background-color: paleturquoise;
+}
+.child-el3{
+	background-color: yellowgreen;
+}
+.child-el4{
+	background-color: blue;
+}
+.child-el5{
+	background-color: violet;
+}
