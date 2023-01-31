@@ -6,12 +6,195 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Learn JavaScript</title>
+	<link rel="stylesheet" href="https://bootswatch.com/5/darkly/bootstrap.min.css" />
+	<link rel="stylesheet" href="./styles/learn-js.css" />
 </head>
 
 <body>
-	<h1>Learnign JavaScript</h1>
+	<section class="section">
+		<div class=" container">
+			<div class="row">
+				<div>
+					<h1>Learning JavaScript</h1>
+				</div>
+				<div>
+					<h2>What is JavaScript?</h2>
+					<p>JavaScript is a programming language that is used to make web pages interactive. It is a
+						client-side
+						scripting
+						language that is used to create dynamic web pages. It is a lightweight, interpreted programming
+						language
+						with
+						first-class functions, most known as the scripting language for Web pages, but it's used in many
+						non-browser
+						environments as well.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div>
+					<h2>Website Visit Counter</h2>
+				</div>
+				<div class="row">
+					<div class="website-counter"></div>
+				</div>
+				<div class="row">
+					<button id="reset" class="btn reset">Reset</button>
+					<button id="refresh" class="btn refresh">Refresh Webpage</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<div class=" container">
+			<div class="row">
+				<div class="padding">
+					<h2>JavaScript Operators</h2>
+					<p>Operators - we are all about logic.</p>
+					<p>There are different types of JavaScript operators:</p>
+					<ul>
+						<li>Arithmetic Operators</li>
+						<li>Assignment Operators</li>
+						<li>Comparison Operators</li>
+						<li>Logical Operators</li>
+						<li>Conditional Operators</li>
+						<li>Type Operators</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="padding">
+					<p>Enter variables below and selct the operator to get the logical output.</p>
+					<div class="margin">
+						<label for="aa">Variable A:&nbsp;&nbsp;<input type="text" name="aa" />
+						</label>
+					</div>
+					<div class="margin">
+						<label for="bb">Variable B:&nbsp;&nbsp;<input type="text" name="bb" />
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="padding">
+					<legend for="kind-op" class="legend-font">Kind of Operation:
+						<div class="row">
+							<label>
+								<input type="radio" name="kind-op" value="arithmetic" id="arithmetic" />
+								Arithmetic Operation
+							</label>
+							<label>
+								<input type="radio" name="kind-op" value="assignment" id="assignment" />
+								Assignment Operation
+							</label>
+							<label>
+								<input type="radio" name="kind-op" value="comparison" id="comparison" />
+								Comparison Operation
+							</label>
+							<label>
+								<input type="radio" name="kind-op" value="logical" id="logical" />
+								Logical Operation
+							</label>
+							<label>
+								<input type="radio" name="kind-op" value="conditional" id="conditional" />
+								Conditional Operation
+							</label>
+							<label>
+								<input type="radio" name="kind-op" value="typeop" id="typeop" />
+								Type Operation
+							</label>
+						</div>
+					</legend>
+				</div>
+			</div>
+			<div class="row">
+				<div id="ar-operations" class="ar-operations padding hidden">
+					<label for="ar-operators">
+						Select your Operator:
+						<select id="ar-operators" name="ar-operators">
+							<option value="">-- Select --</option>
+							<option value="+">+</option>
+							<option value="-">-</option>
+							<option value="*">*</option>
+							<option value="/">/</option>
+							<option value="%">%</option>
+							<option value="**">**</option>
+							<option value="++">++</option>
+							<option value="--">--</option>
+						</select>
+					</label>
+				</div>
+				<div id="as-operations" class="as-operations padding hidden">
+					<label for="as-operators">
+						Select your Operator:
+						<select id="as-operators" name="as-operators">
+							<option value="">-- Select --</option>
+							<option value="=">=</option>
+							<option value="+=">+=</option>
+							<option value="-=">-=</option>
+							<option value="*=">*=</option>
+							<option value="/=">/=</option>
+							<option value="%=">**</option>
+							<option value="**=">**=</option>
+						</select>
+					</label>
+				</div>
+				<div id="co-operations" class="co-operations padding hidden">
+					<label for="co-operators">
+						Select your Operator:
+						<select id="co-operators" name="co-operators">
+							<option value="">-- Select --</option>
+							<option value="==">==</option>
+							<option value="===">===</option>
+							<option value="!=">!=</option>
+							<option value="!==">!==</option>
+							<option value=">"> &gt; </option>
+							<option value="<">
+								&lt; </option>
+							<option value=">=">&gt;=</option>
+							<option value="<=">
+								&lt;= </option>
+							<option value="?">
+								? </option>
+						</select>
+					</label>
+				</div>
+				<div id="lo-operations" class="lo-operations padding hidden">
+					<label for="lo-operators">
+						Select your Operator:
+						<select id="lo-operators" name="lo-operators">
+							<option value="">-- Select --</option>
+							<option value="&&">&&</option>
+							<option value="||">||</option>
+							<option value="!">!</option>
+						</select>
+					</label>
+				</div>
+				<div id="to-operations" class="to-operations padding hidden">
+					<label for="to-operators">
+						Select your Operator:
+						<select id="to-operators" name="to-operators">
+							<option value="">-- Select --</option>
+							<option value="typeOf">typeOff</option>
+							<option value="instanceOf">instanceOf</option>
+						</select>
+					</label>
+				</div>
+			</div>
+			<div class="row">
+				<div id="co-container" class="comparison-operators"></div>
+			</div>
+			<div class="row">
+				<div class="col-12 padding">
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- Scripts -->
-	<script src="../InSession/js/learningjs.js">	</script>
+	<!-- <script src="../InSession/js/learningjs.js">	</script> -->
+	<script src="../InSession/js/learn-js.js">	</script>
+	<script src="../InSession/js/learn-js_operaters.js">	</script>
+	<script src="../InSession/js/learnjscon.js">	</script>
 </body>
 
 </html>
