@@ -48,4 +48,13 @@ const person2 = () => {
 
 };
 
+console.log("\n\nExercise 6: Bonus\n");
+function halfNumber(num) {
+	return num / 2;
+}
+let halvedNumber = halfNumber(10);
+console.log(`Half of 10 is ${halvedNumber}`);
+
+
+
 

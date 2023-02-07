@@ -56,3 +56,12 @@ console.log(c % a);
 console.log(Math.pow(a, b));
 console.log(Math.sqrt(a));
 console.log(typeof (a + 'b'));
+
+console.log('\n\nExercise 6 - Playing with Arrays\n');
+const arr1 = [1, 2, 3, 4, 5];
+const arr2 = [20, 30, 40, 50, 60];
+
+console.log("Array 1:\t" + arr1);
+console.log("Array 2:\t" + arr2);
+console.log(Math.max(...arr1, ...arr2));
+console.log(Math.min(...arr1, ...arr2));

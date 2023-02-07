@@ -28,3 +28,19 @@
 .refresh {
     background-color: #ba0009;
 }
+
+.hidden {
+    display: none;
+}
+
+.padding {
+    padding: 20px;
+}
+
+.margin {
+    margin: 20px;
+}
+
+.legend-font {
+    font-size: 16px;
+}
