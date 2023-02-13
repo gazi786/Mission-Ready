@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Methods</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+		integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://bootswatch.com/5/darkly/bootstrap.min.css" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>Methods</h1>
+			<div class="col-md-6">
+				<div class="card card-body">
+					<h3>Parameters</h3>
+					<p>What are parameters...?</p>
+					<button class="btn btn-primary" id="paramBtn" type="button" data-bs-toggle="modal"
+						data-bs-target="#displayModal" data-bs-whatever="paramModal">Learn More</button>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card card-body">
+					<h3>Arguments</h3>
+					<p>What are arguments...?</p>
+					<button class="btn btn-primary" id="argueBtn" type="button" data-bs-toggle="modal"
+						data-bs-target="#displayModal" data-bs-whatever="argueModal">Learn More</button>
+				</div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="displayModal" tabindex="-1" aria-labelledby="disModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title fs-5" id="disModalLabel"></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<form id="bsForm">
+				<div class="mb-3">
+					<label for="myChoiceUno" class="form-label">What number is on your mind now?</label>
+					<input type="text" class="form-control" id="myChoiceUno"
+						placeholder="Enter a number of your choice...">
+				</div>
+				<div class="mb-3">
+					<label for="myChoiceDos" class="form-label">What about now...?</label>
+					<input type="text" class="form-control" id="myChoiceDos"
+						placeholder="Enter a number of your choice...">
+				</div>
+				<button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+			</form>
+			<div class="row">
+				<div class="card card-body">
+					<h3>Results</h3>
+					<p id="results"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
+		integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="../InSession/js/method.js"></script>
+</body>
+
+</html>

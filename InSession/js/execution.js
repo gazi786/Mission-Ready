@@ -5,24 +5,24 @@ let greetings, situated;
 //Data to be looped
 const personData = [
 	{
-		firstName: "John",
-		lastName: "Doe",
+		firstName: "Mike",
+		lastName: "Ross",
 		favourites: ["Pizza", "Ice Cream", "Candy"],
 		city: "Sydney",
 		country: "Australia",
 		continent: "Oceania",
 	},
 	{
-		firstName: "Jane",
-		lastName: "Doe",
+		firstName: "Rachel",
+		lastName: "Zane",
 		favourites: ["Toast", "Fruits", "Popsicles"],
 		city: "Toronto",
 		country: "Canada",
 		continent: "North America",
 	},
 	{
-		firstName: "Joe",
-		lastName: "Doe",
+		firstName: "Harvey",
+		lastName: "Specter",
 		favourites: ["Pizza", "Soda", "Candy"],
 		city: "Brussels",
 		country: "Belgium",
@@ -49,7 +49,7 @@ class City {
 		this.continent = continent;
 	}
 	cityBase() {
-		situated = `You are location in ${this.name}, ${this.country}. Your country is a part of ${this.continent}`;
+		situated = `You are located in ${this.name}, ${this.country}. Your country is a part of ${this.continent}.`;
 	}
 }
 
@@ -64,4 +64,6 @@ for (let i = 0; i < personData.length; i++) {
 	city.cityBase();
 	loopPerson.innerHTML += `<p style="color:skyblue">${greetings}</p><p style="color:turquoise">${situated}</p>`;
 }
+
+
 
