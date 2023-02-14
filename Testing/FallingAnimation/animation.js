@@ -23,3 +23,9 @@ function startAnimating() {
 		}
 	}, 50);
 }
+
+window.onload = function () {
+	//startAnimating();
+	alert("Hello! I am an alert box!!");
+	document.getElementById("my_audio").play();
+}

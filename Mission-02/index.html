@@ -14,13 +14,35 @@
 	<title>Hangman</title>
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
 	<!-- Stylesheet -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+		integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="./assets/css/game.css" />
 </head>
 
 <body>
 	<canvas id="background"></canvas>
-	<div class="container">
+	<div class="container overlay hide">
+		<!-- Modal -->
+		<div id="starterModal" class="start-game">
+			<div class="name-content">
+				<form class="d-flex flex-column mb-3">
+					<div class="">
+						<label class="form-label" for="playerNameInput">Player Name
+							<input type="text" id="playerNameInput" class="form-control" />
+						</label>
+					</div>
+					<div class="">
+						<button id="saveNameBtn" class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="gameBoard" class="container">
 		<div id="options-container"></div>
 		<div id="letter-container" class="letter-container hide"></div>
 		<div id="user-input-section"></div>
@@ -30,11 +52,39 @@
 			<button id="new-game-button">New Game</button>
 		</div>
 	</div>
+	<div id="scoreboard">
+		<span class="sb-click close-sb">&#215;</span>
+		<div class="scoreboard-title">Score Board</div>
+		<div id="scoreboard-container">
+			<div class="score-content">
+				<div>Name</div>
+				<div>Wins</div>
+				<div>Losses</div>
+			</div>
+			<div class="score-content">
+				<div id="playerName">PlayerName</div>
+				<div id="wins">0</div>
+				<div id="losses">0</div>
+			</div>
+			<div class="reset-container">
+				<button id="resetSB" class="reset-scoreboard">Reset Scoreboard</button>
+			</div>
+		</div>
+	</div>
+
 	<div class="celebration-container">
 		<canvas id="celebrations"></canvas>
 	</div>
+	<span class="sb-click open-sb">&#9776;</span>
 
 	<!-- Script -->
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
+		integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
 	<script src="./assets/js/background.js"></script>
 	<script src="./assets/js/game.js"></script>

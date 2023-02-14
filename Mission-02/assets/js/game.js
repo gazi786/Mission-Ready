@@ -15,6 +15,8 @@
  * The displayOptions() function is used to display the options buttons on the web page, by looping through the properties in the options object and creating a button for each one.
  * The blocker() function disables all the option buttons and the letter buttons, and removes the "hide" class from the new game container, making it visible.
  * The generateWord(optionValue) function is used to generate a random word from the selected category. It takes in a parameter optionValue which is used to identify which category has been selected. The function first highlights the selected category button and disables it, and then generates a random word from the chosen category. The chosen word is then displayed on the page as a series of dashes to represent each letter.
+ * The generateLetterButtons() function is used to generate the letter buttons on the page. It loops through the alphabet and creates a button for each letter.
+ * The Scoreboard class is used to create a scoreboard object which stores the player's name and the number of wins and losses. It has a method called displayScoreboard() which is used to display the scoreboard on the page. It also has a method called updateScoreboard() which is used to update the scoreboard when the user wins or loses a game. The scoreboard is stored in the local storage of the browser.
  * The WinCelebration() function creates a fireworks animation on the page to celebrate a win. This is done using the Fireworks.default library.
  * The loseCeleberation() function creates a canvas of sad face to celebrate a loss.
  * Th
@@ -23,9 +25,15 @@
  */
 
 //Global variables
+//Game Start variables
+const modalOverlay = document.querySelector('.overlay');
+const nameInput = document.querySelector('#playerNameInput');
+const saveNameBtn = document.querySelector('#saveNameBtn');
+
 const letterContainer = document.getElementById("letter-container");
 const optionsContainer = document.getElementById("options-container");
 const userInputSection = document.getElementById("user-input-section");
+const gameBoard = document.getElementById("gameBoard");
 const newGameContainer = document.getElementById("new-game-container");
 const newGameButton = document.getElementById("new-game-button");
 const hangman = document.getElementById("hangman-cv");
@@ -33,6 +41,18 @@ const resultText = document.getElementById("result-text");
 const celebrations = document.querySelector('.celebration-container');
 const celebContainer = document.querySelector('#celebrations');
 
+
+//scoreboard variables
+let wins = 0;
+let losses = 0;
+const scoreBoard = document.getElementById('scoreboard');
+const sbClose = document.querySelector('.close-sb');
+const sbOpen = document.querySelector('.open-sb');
+const sbContainer = document.getElementById('scoreboard-container');
+const resetSB = document.querySelector('#resetSB');
+
+//Get Player Name and scores
+let scores = [];
 
 //Options values for buttons
 let options = {
@@ -45,12 +65,34 @@ let options = {
 	],
 
 	countries: [
-		"Fiji", "Samoa", "Australia", "New Zealand", "Argentina", "France", "Tonga", "Mexico", "Italy", "Spain", "Brazil"
+		"Fiji", "Samoa", "Australia", "Zealandia", "Argentina", "France", "Tonga", "Mexico", "Italy", "Spain", "Brazil"
 	],
 
 	vegetables: [
 		"Carrot", "Cucumber", "Broccoli", "Cabbage", "Onion", "Garlic", "Potato", "Tomato", "Spinach", "Cauliflower"
 	],
+};
+
+//set player name
+const setPlayerName = () => {
+	let playerName = playerNameInput.value;
+	if (playerName) {
+		localStorage.setItem("name", playerName);
+		gameBoard.classList.remove("hide");
+		modalOverlay.classList.add("hide");
+	}
+};
+//save Player name
+saveNameBtn.addEventListener("click", setPlayerName);
+//Get Player Name if any and return it
+const getPlayerName = () => {
+	let playerName = localStorage.getItem("name");
+	if (!playerName) {
+		gameBoard.classList.add("hide");
+		sbOpen.classList.add("hide");
+		modalOverlay.classList.remove("hide");
+	}
+	return playerName || "Player";
 };
 
 //count
@@ -88,6 +130,7 @@ const blocker = () => {
 //Word Generator
 const generateWord = (optionValue) => {
 	let optionsButtons = document.querySelectorAll(".options");
+	optionsContainer.innerHTML = `<h3>You have selected ${optionValue.toUpperCase()} category.</h3><hr>`;
 	//If optionValur matches the button innerText then highlight the button
 	optionsButtons.forEach((button) => {
 		if (button.innerText.toLowerCase() === optionValue) {
@@ -95,7 +138,6 @@ const generateWord = (optionValue) => {
 		}
 		button.disabled = true;
 	});
-
 	//initially hide letters, clear previous word
 	letterContainer.classList.remove("hide");
 	userInputSection.innerText = "";
@@ -247,6 +289,109 @@ const loseCelebration = () => {
 	}, 5000);
 };
 
+//Scoreboard
+class Scoreboard {
+	constructor() {
+		this.wins = 0;
+		this.losses = 0;
+		this.scoreboard = scoreBoard;
+		this.openScoreboard = sbOpen;
+		this.playerBoard = document.querySelector('#playerName');
+		this.winBoard = document.querySelector('#wins');
+		this.lossBoard = document.querySelector('#losses');
+		this.player = getPlayerName();
+		this.scores = [];
+		this.loadData();
+
+		// Load saved wins and losses
+		if (localStorage.getItem("name")) {
+			this.player = localStorage.getItem("name");
+			this.playerBoard.innerHTML = this.player;
+		}
+		if (localStorage.getItem("wins")) {
+			this.wins = parseInt(localStorage.getItem("wins"));
+			this.winBoard.innerHTML = this.wins;
+		}
+		if (localStorage.getItem("losses")) {
+			this.losses = parseInt(localStorage.getItem("losses"));
+			this.lossBoard.innerHTML = this.losses;
+		}
+	}
+
+	displayScoreboard() {
+		this.scoreboard.style.width = "25%";
+		this.openScoreboard.classList.add("hide");
+	}
+
+	hideScoreboard() {
+		this.scoreboard.style.width = "0";
+		this.openScoreboard.classList.remove("hide");
+	}
+
+	updateScoreboard(result) {
+		if (result === "win") {
+			this.wins += 1;
+			this.winBoard.innerHTML = `${this.wins}`;
+			localStorage.setItem("wins", this.wins);
+		} else {
+			this.losses += 1;
+			this.lossBoard.innerHTML = `${this.losses}`;
+			localStorage.setItem("losses", this.losses);
+		}
+
+		let score = {
+			name: this.player,
+			result: result,
+		};
+		this.scores.push(score);
+		this.saveData();
+	}
+
+	saveData() {
+		localStorage.setItem("scores", JSON.stringify(this.scores));
+	}
+
+	loadData() {
+		const data = JSON.parse(localStorage.getItem("scores"));
+		if (data) {
+			this.scores = data;
+		}
+	}
+	resetScoreboard() {
+		this.wins = 0;
+		this.losses = 0;
+		this.scores = [];
+		this.winBoard.innerHTML = ``;
+		this.winBoard.innerHTML = `${this.wins}`;
+		this.lossBoard.innerHTML = `${this.losses}`;
+		localStorage.removeItem("name");
+		localStorage.removeItem("wins");
+		localStorage.removeItem("losses");
+		localStorage.removeItem("scores");
+		setInterval(() => {
+			location.reload();
+		}, 750);
+	}
+}
+
+// Global instance of the Scoreboard class
+const scoreboard = new Scoreboard();
+
+//Display Scoreboard
+const displayScoreboard = () => {
+	sbOpen.addEventListener("click", () => {
+		scoreboard.displayScoreboard();
+	});
+	sbClose.addEventListener("click", () => {
+		scoreboard.hideScoreboard();
+	});
+
+	//Reset Scoreboard
+	resetSB.addEventListener("click", () => {
+		scoreboard.resetScoreboard();
+	});
+};
+
 //Initial Function (Called when page loads OR user presses new game)
 const initializer = () => {
 	winCount = 0;
@@ -283,6 +428,8 @@ const initializer = () => {
 							resultText.innerHTML = `<h2 class='win-msg'>You Win!!</h2><p>The word was <span>${chosenWord}</span></p>`;
 							//block all buttons
 							blocker();
+							//on win function
+							scoreboard.updateScoreboard('win');
 							//celebration canvas
 							WinCelebration();
 						}
@@ -297,6 +444,7 @@ const initializer = () => {
 				if (count == 6) {
 					resultText.innerHTML = `<h2 class='lose-msg'>You Lose!!</h2><p>The word was <span>${chosenWord}</span></p>`;
 					blocker();
+					scoreboard.updateScoreboard('lose');
 					//celebration canvas
 					loseCelebration();
 				}
@@ -308,6 +456,10 @@ const initializer = () => {
 	}
 
 	displayOptions();
+
+	//activate the score board
+	displayScoreboard();
+
 	//Call to canvasCreator (for clearing previous canvas and creating initial canvas)
 	let { initialDrawing } = canvasCreator();
 	//initialDrawing would draw the frame
