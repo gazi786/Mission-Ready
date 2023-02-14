@@ -82,6 +82,7 @@ const setPlayerName = () => {
 		modalOverlay.classList.add("hide");
 	}
 };
+
 //save Player name
 saveNameBtn.addEventListener("click", setPlayerName);
 //Get Player Name if any and return it
@@ -105,6 +106,7 @@ let chosenWord = "";
 const displayOptions = () => {
 	optionsContainer.innerHTML += `<h3>Please Select An Option</h3>`;
 	let buttonCon = document.createElement("div");
+	;
 	for (let value in options) {
 		buttonCon.innerHTML += `<button class="options" onclick="generateWord('${value}')">${value}</button>`;
 	}
