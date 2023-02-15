@@ -104,13 +104,22 @@ let chosenWord = "";
 
 //Display option buttons
 const displayOptions = () => {
-	optionsContainer.innerHTML += `<h3>Please Select An Option</h3>`;
+	optionsContainer.innerHTML += `<h3 class="starter-header">Please Select An Option</h3>`;
 	let buttonCon = document.createElement("div");
-	;
 	for (let value in options) {
 		buttonCon.innerHTML += `<button class="options" onclick="generateWord('${value}')">${value}</button>`;
 	}
 	optionsContainer.appendChild(buttonCon);
+};
+
+// Call this function after an option is selected
+const updateHeader = (optionValue) => {
+	// Update the header to show the selected category
+	const header = document.querySelector('.starter-header');
+	header.innerHTML = `You have selected ${optionValue.toUpperCase()} category.`;
+
+	// Add a horizontal line below the header
+	header.insertAdjacentHTML('afterend', '<hr>');
 };
 
 //Block all the Buttons
@@ -131,15 +140,19 @@ const blocker = () => {
 
 //Word Generator
 const generateWord = (optionValue) => {
+
 	let optionsButtons = document.querySelectorAll(".options");
-	optionsContainer.innerHTML = `<h3>You have selected ${optionValue.toUpperCase()} category.</h3><hr>`;
-	//If optionValur matches the button innerText then highlight the button
+
+	updateHeader(optionValue);
+
+	//If optionValue matches the button innerText then highlight the button
 	optionsButtons.forEach((button) => {
 		if (button.innerText.toLowerCase() === optionValue) {
 			button.classList.add("active");
 		}
 		button.disabled = true;
 	});
+
 	//initially hide letters, clear previous word
 	letterContainer.classList.remove("hide");
 	userInputSection.innerText = "";
@@ -149,11 +162,13 @@ const generateWord = (optionValue) => {
 	chosenWord = optionArray[Math.floor(Math.random() * optionArray.length)];
 	chosenWord = chosenWord.toUpperCase();
 
+
 	//replace every letter with span containing dash
 	let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
 
 	//Display each element as span
 	userInputSection.innerHTML = displayItem;
+
 };
 
 //Celebration canvas
