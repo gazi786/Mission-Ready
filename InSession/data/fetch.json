@@ -1,0 +1,59 @@
+{
+  "employees": [
+    {
+      "firstname": "John",
+      "lastname": "Doe",
+      "age": 27,
+      "department": "Sales",
+      "title": "Sales Manager",
+      "email": "john.doe@gmail.com",
+      "image": "https://api.dicebear.com/5.x/adventurer/svg?seed=Angel"
+    },
+    {
+      "firstname": "Mary",
+      "lastname": "Kan",
+      "age": 22,
+      "department": "Marketing",
+      "title": "Marketing Manager",
+      "email": "mary.kan@gmail.com",
+      "image": "https://api.dicebear.com/5.x/adventurer/svg?seed=Sheba"
+    },
+    {
+      "firstname": "Ethan",
+      "lastname": "Hunt",
+      "age": 17,
+      "department": "IT",
+      "title": "IT Manager",
+      "email": "ethan.hunt@gmail.com",
+
+      "image": "https://api.dicebear.com/5.x/adventurer/svg?seed=Snowball"
+    },
+    {
+      "firstname": "Joe",
+      "lastname": "Paul",
+      "age": 53,
+      "department": "Sales",
+      "title": "Sales Executive",
+      "email": "joe.paul@gmail.com",
+      "image": "https://api.dicebear.com/5.x/adventurer/svg?seed=Felix"
+    },
+    {
+      "firstname": "Amelia",
+      "lastname": "Singh",
+      "age": 87,
+      "department": "Sales",
+      "title": "Sales Executive",
+      "email": "amelia.singh@gmail.com",
+      "image": "https://api.dicebear.com/5.x/adventurer/svg?seed=Maggie"
+    },
+    {
+      "firstname": "Adam",
+      "lastname": "Smith",
+      "age": 34,
+      "department": "Executive",
+      "title": "Executive Manager",
+      "email": "adam.smith@gmail.com",
+      "image": "https://api.dicebear.com/5.x/adventurer/svg?seed=Boo"
+    }
+  ]
+}
