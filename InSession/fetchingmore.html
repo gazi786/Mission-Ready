@@ -15,7 +15,14 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<label for="getCity">Search my City<input type="text" id="getCity" name="cityInput" /></label>
+			<div class="col-md-12">
+				<h1 class="text-center">Fetching Data From API - Weather</h1>
+				<label for="getCity">Search my City<input type="text" id="getCity" name="cityInput" /></label>
+				<button class="btn btn-primary" id="weatherBtn">Get City Weather</button>
+			</div>
+			<div id="displayWeather" class="row justify-content-center align-items-center">
+				<!-- Data will be displayed here -->
+			</div>
 		</div>
 	</div>
 

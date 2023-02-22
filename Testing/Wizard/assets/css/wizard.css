@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 5px 5px black;
+    border: 1px solid black;
+    padding: 10px;
+    min-width: 500px;
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#controls {
+    font-family: 'Bangers', cursive;
+    font-size: 40px;
+    margin: 10px;
+}
+
+#controls>label {
+    font-size: 60px;
+    margin: 10px;
+}
+
+#controls>select {
+    font-size: 30px;
+    margin: 20px;
+}
+
+#wizardCanvas {
+    box-shadow: inset 5px 5px 5px black;
+}
