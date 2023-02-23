@@ -1,118 +1,121 @@
+// Select the canvas and get its 2D context
+const canvas = document.querySelector('#wizardCanvas');
+const context = canvas.getContext('2d');
 
-let actionState = "action1";
+// Set canvas dimensions
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Define sprite animation object
+const spriteAnimations = {
+	attack1: [
+		{
+			loc: [],
+			src: './assets/images/attack1.png',
+			sizeOfSpritesheet: [896, 128],
+			numColumns: 7,
+			numRows: 1,
+			currentFrameIndex: 0,
+			speed: 7,
+			isLooping: true,
+			isFinished: false,
+			positionX: 0,
+			positionY: canvas.height / 2,
+		},
+		{
+			loc: [],
+			src: './assets/images/charge1.png',
+			sizeOfSpritesheet: [576, 128],
+			numColumns: 9,
+			numRows: 1,
+			currentFrameIndex: 0,
+			speed: 7,
+			isLooping: true,
+			isFinished: false,
+			positionX: 150,
+			positionY: canvas.height / 2,
+		},
+	],
+};
+
+// Set the initial action state
+let actionState = 'attack1';
+
+// Listen for action change
 const actionSelect = document.getElementById('wizardActions');
-
 actionSelect.addEventListener('change', (e) => {
 	actionState = e.target.value;
 });
 
-const wizCanvas = document.getElementById('wizardCanvas');
-const context = wizCanvas.getContext('2d');
-
-wizCanvas.width = window.innerWidth;
-wizCanvas.height = window.innerHeight;
-
-// Variables
-let spriteWidth = 0;
-let spriteHeight = 0;
-let gameFrame = 0;
-const staggerFrames = 10;
-
-const spriteAnimations = {
-	action1: {
-		loc: [],
-		src: ['./assets/images/attack1.png', './assets/images/charge1.png'],
-		sizeOfSpritesheet: [[896, 128], [576, 128]],
-		numColumns: [7, 9],
-		numRows: [1, 1]
-	}
-};
-
-for (let k = 0; k < spriteAnimations[actionState].src.length; k++) {
-	let src = spriteAnimations[actionState].src[k];
-	let numColumns = spriteAnimations[actionState].numColumns[k];
-	let numRows = spriteAnimations[actionState].numRows[k];
-	let fullWidthofSS = spriteAnimations[actionState].sizeOfSpritesheet[k][0];
-	let fullHeightofSS = spriteAnimations[actionState].sizeOfSpritesheet[k][1];
-
-	let positionX;
-	let positionY;
-	let shiftOffX = 0;
-
-	spriteWidth = Math.floor(fullWidthofSS / numColumns);
-	spriteHeight = Math.floor(fullHeightofSS / numRows);
-
-	for (let i = 0; i < numRows; i++) {
-		for (let j = 0; j < numColumns; j++) {
-			positionX = j * spriteWidth;
-			positionY = 0;
-
-			if (k === 1) { // charge sprite sheet
-				shiftOffX = spriteWidth * 10;
-				positionX += shiftOffX;
-			}
-
-			spriteAnimations[actionState].loc.push({
-				x: positionX,
-				y: positionY
-			});
+// Load sprite images
+const images = {};
+const loadImages = () => {
+	const spriteSheetPromises = [];
+	for (const action in spriteAnimations) {
+		for (const sprite of spriteAnimations[action]) {
+			spriteSheetPromises.push(new Promise((resolve) => {
+				images[sprite.src] = new Image();
+				images[sprite.src].src = sprite.src;
+				images[sprite.src].onload = resolve;
+			}));
 		}
 	}
-}
+	return Promise.all(spriteSheetPromises);
+};
 
+// Draw the current sprite frame
+const drawSprite = (sprite, x, y) => {
+	const spriteWidth = Math.floor(sprite.sizeOfSpritesheet[0] / sprite.numColumns);
+	const spriteHeight = Math.floor(sprite.sizeOfSpritesheet[1] / sprite.numRows);
+	context.drawImage(images[sprite.src], spriteWidth * sprite.currentFrameIndex, 0, spriteWidth, spriteHeight, x, y, spriteWidth, spriteHeight);
+};
 
+let gameFrame = 0;
+let delayFrames = 2; // number of frames to delay the charge animation
+let currentDelayFrame = 0; // current frame of the delay
 
-function animate() {
-	let currentAnimation = spriteAnimations[actionState];
-	let totalFrames = currentAnimation.loc.length;
-	let position = Math.floor(gameFrame / staggerFrames) % totalFrames;
-	let currentLoc = currentAnimation.loc[position];
-	frameX = currentLoc.x;
-	frameY = currentLoc.y;
-	const tableHeight = 400;
-	let minFrame = 0;
-	let currentFrame = 0;
+const animate = () => {
+	// Clear the canvas
+	context.clearRect(0, 0, canvas.width, canvas.height);
 
-	let sprtieLocationY = wizCanvas.height - tableHeight;
+	// Get the current action state and sprites
+	const sprites = spriteAnimations[actionState];
 
+	// Loop through each sprite and draw it
+	sprites.forEach((sprite) => {
+		// Get the current sprite position
+		const x = sprite.positionX + sprite.currentFrameIndex * 10;
+		const y = sprite.positionY;
 
-	context.clearRect(0, 0, wizCanvas.width, wizCanvas.height);
+		// Draw the sprite
+		drawSprite(sprite, x, y);
 
-	let imageIndex = 0;
-	let numColumns, numRows, numFrames, sheetWidth, sheetHeight;
+		// Increment the current frame index and reset it if necessary
+		sprite.currentFrameIndex = (gameFrame % sprite.speed === 0) ? (sprite.currentFrameIndex + 1) % sprite.numColumns : sprite.currentFrameIndex;
 
-	// console.log(`position: ${position} totalFrames: ${totalFrames} gameFrame: ${gameFrame} staggerFrames: ${staggerFrames}`);
+		// If the current sprite is the charge sprite and the delay counter is not finished, increment the delay counter
+		if (sprite.src === './assets/images/charge1.png' && currentDelayFrame < delayFrames) {
+			currentDelayFrame++;
+		}
 
-	console.log(`frameX:  ${frameX} frameY: ${frameY}`);
-	let x = wizCanvas.width / 2 - spriteWidth / 2;
-	let y = wizCanvas.height / 2 - spriteHeight / 2;
+		// If the current sprite is the charge sprite and the delay counter is finished, start the animation
+		if (sprite.src === './assets/images/charge1.png' && currentDelayFrame >= delayFrames) {
+			sprite.currentFrameIndex = (gameFrame % sprite.speed === 0) ? (sprite.currentFrameIndex + 1) % sprite.numColumns : sprite.currentFrameIndex;
+		}
 
+	});
 
-
-
-	for (let i = 0; i < currentAnimation.src.length; i++) {
-		let image = new Image();
-		image.src = currentAnimation.src[i];
-
-
-		numColumns = currentAnimation.numColumns[i];
-		numRows = currentAnimation.numRows[i];
-		numFrames = numColumns * numRows;
-		sheetWidth = spriteWidth * numColumns;
-		sheetHeight = spriteHeight * numRows;
-
-
-		context.drawImage(image, frameX, frameY, spriteWidth, spriteHeight, x, y, spriteWidth, spriteHeight);
-	}
-	if (this.currentFrame < this.totalFrames) {
-		this.currentFrame++;
-	} else {
-		this.currentFrame = this.minFrame;
-	}
-
+	// Increment the game frame
 	gameFrame++;
+
+	// Request the next animation frame
 	requestAnimationFrame(animate);
-}
+};
 
 
-animate();
+
+// Start the animation loop once all images are loaded
+loadImages().then(() => {
+	animate();
+});
+
