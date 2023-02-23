@@ -1,0 +1,12 @@
+[
+  { "name": "Groceries", "items": ["Milk", "Bread", "Eggs", "Cheese"] },
+  {
+    "name": "Books",
+    "items": [
+      "The Great Gatsby",
+      "To Kill a Mockingbird",
+      "1984",
+      "Pride and Prejudice"
+    ]
+  }
+]
