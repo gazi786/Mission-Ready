@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import useFetch from "./useFetch";
 
 const Employees = () => {
-  const [employees, setEmployees] = useState([]);
+  const {
+    error,
+    isPending,
+    data: employees,
+  } = useFetch(`http://localhost:4000/api/v1/employees`);
 
-  useEffect(() => {
-    fetch("http://localhost:4000/api/v1/employees")
-      .then((response) => response.json())
-      .then((data) => setEmployees(data));
-  }, []);
   return (
     <div className="container">
       <div className="row justify-content-center align-items-center">
         <h1>Employees</h1>
       </div>
-      <div className="row justify-content-center align-items-center">
+      <div className="row justify-content-center align-items-center gap-5">
+        {error && <div>{error}</div>}
+        {isPending && <div>Loading...</div>}
         {employees &&
           employees.map((employee) => (
             <div className="col col-3 card" key={employee.employeeNumber}>
               <img
                 src={employee.profilePic}
-                className="card-img-top"
+                className="card-img-top img-fluid rounded"
+                style={{ marginTop: "2rem", maxHeight: "200px", width: "auto" }}
                 alt={employee.firstName + " " + employee.lastName}
               />
               <div className="card-body">

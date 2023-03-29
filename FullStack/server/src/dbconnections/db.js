@@ -43,11 +43,31 @@ app.get('/api/v1/employees/:id', (req, res) => {
 	const id = req.params.id;
 	pool.query(`SELECT * FROM missionready.employees WHERE employeeNumber = ${id}`, (err, results) => {
 		if (err) {
-			res.status(500).json({ err: 'Error retrieving data from database for id ' + id });
+			res.status(500).json({ error: 'Error retrieving data from database for id ' + id });
+		} else if (results.length === 0) {
+			res.status(404).json({ error: 'No employee found with ID ' + id });
 		} else {
-			res.json(results);
+			res.json(results[0]);
 		}
 	});
 });
+
+app.put('/api/v1/employees/:id', (req, res) => {
+	const id = req.params.id;
+	const { firstName, lastName, email, extension, jobTitle, profilePic } = req.body;
+	const query = `UPDATE missionready.employees SET firstName = ?, lastName = ?, email = ?, extension = ?, jobTitle = ?, profilePic = ? WHERE employeeNumber = ?`;
+
+	pool.query(query, [firstName, lastName, email, extension, jobTitle, profilePic, id], (err, results) => {
+		if (err) {
+			res.status(500).json({ error: 'Error updating employee data in the database.' });
+		} else if (results.affectedRows === 0) {
+			res.status(404).json({ error: `No employee found with ID ${id}.` });
+		} else {
+			res.status(200).json({ message: 'Employee data updated successfully.' });
+		}
+	});
+});
+
+
 
 module.exports = app;
